@@ -6,4 +6,4 @@ tmp/*
 
 dist
 
-__tests__
+__tests__/database.sqlite
