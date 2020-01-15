@@ -14,7 +14,7 @@ class SessionController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      res.status(400).json({ error: 'Validation Fails' });
+      return res.status(400).json({ error: 'Validation Fails' });
     }
 
     const { email, password } = req.body;
@@ -23,7 +23,7 @@ class SessionController {
 
     if (!user) res.status(401).json({ error: 'User not exists' });
 
-    if (!user.checkPassword(password))
+    if (!(await user.checkPassword(password)))
       res.status(401).json({ error: 'Password does not match' });
 
     const { id, name, isAdmin } = user;
